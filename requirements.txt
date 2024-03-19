@@ -1,8 +1,8 @@
 pyrogram
 TgCrypto
-py-tgcalls==0.5.2
+py-tgcalls==0.9.7
 python-dotenv
-yt-dlp
+git+https://github.com/Tarx77/Hexor.git
 youtube_search_python
 requests
 aiohttp
