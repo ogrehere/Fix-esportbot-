@@ -1,14 +1,14 @@
 FROM debian:latest
 
-RUN apt update && apt upgrade -y && \
-    apt install -y git curl python3-pip ffmpeg && \
-    pip3 install -U pip && \
-    curl -sL https://deb.nodesource.com/setup_15.x | bash - && \
-    apt-get install -y nodejs && \
-    npm i -g npm
+python-nodejs:python3.10-nodejs19
 
-WORKDIR /app/
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ffmpeg \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY . /app/
-RUN pip3 install -U -r requirements.txt
+WORKDIR /app/
+RUN pip3 install --no-cache-dir -U -r requirements.txt
 
-CMD python3 main.py
+CMD bash start
