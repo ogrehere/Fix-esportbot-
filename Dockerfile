@@ -1,14 +1,20 @@
 FROM debian:latest
 
-python-nodejs:python3.10-nodejs19
+# Update and install dependencies
+RUN apt-get update && apt-get upgrade -y \
+    && apt-get install -y git curl python3-pip ffmpeg \
+    && pip3 install -U pip \
+    && curl -sL https://deb.nodesource.com/setup_15.x | bash - \
+    && apt-get install -y nodejs \
+    && npm i -g npm
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends ffmpeg \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-COPY . /app/
+# Set up the working directory and copy the application code
+RUN mkdir /app/
 WORKDIR /app/
-RUN pip3 install --no-cache-dir -U -r requirements.txt
+COPY . /app/
 
-CMD bash start
+# Install Python dependencies
+RUN pip3 install -U -r requirements.txt
+
+# Define the command to run the application
+CMD python3 main.py
