@@ -8,9 +8,9 @@ requests
 aiohttp
 aiofiles
 asyncio
-youtube_search
 search_engine_parser
 ffmpeg-python
 ffmpeg
 Pillow
 ujson
+git+https://github.com/joetats/youtube_search
