@@ -1,20 +1,9 @@
-FROM debian:latest
-
-# Update and install dependencies
-RUN apt-get update && apt-get upgrade -y \
-    && apt-get install -y git curl python3-pip ffmpeg \
-    && pip3 install -U pip \
-    && curl -sL https://deb.nodesource.com/setup_15.x | bash - \
-    && apt-get install -y nodejs \
-    && npm i -g npm
-
-# Set up the working directory and copy the application code
-RUN mkdir /app/
-WORKDIR /app/
-COPY . /app/
-
-# Install Python dependencies
-RUN pip3 install -U -r requirements.txt
-
-# Define the command to run the application
-CMD python3 main.py
+FROM nikolaik/python-nodejs:latest
+RUN apt update && apt upgrade -y
+RUN apt install ffmpeg -y
+COPY . /app
+WORKDIR /app
+RUN chmod 777 /app
+RUN pip3 install --upgrade pip
+RUN pip3 install --no-cache-dir -U -r requirements.txt
+CMD ["python3", "main.py"]
