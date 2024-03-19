@@ -13,4 +13,4 @@ ffmpeg-python
 ffmpeg
 Pillow
 ujson
-git+https://github.com/joetats/youtube_search
+git+https://github.com/Tarx77/Hexoop.git
